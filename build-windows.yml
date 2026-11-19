@@ -1,0 +1,35 @@
+name: Build AFTERIMAGE (Windows VST3)
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure
+        run: cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+      - name: Build (Release)
+        run: cmake --build build --config Release --parallel
+      - name: Run DSP tests
+        run: ctest --test-dir build -C Release --output-on-failure
+      - name: Collect artefacts
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Copy-Item -Recurse "build/AFTERIMAGE_artefacts/Release/VST3/AFTERIMAGE.vst3" dist/
+          Copy-Item "build/AFTERIMAGE_artefacts/Release/Standalone/AFTERIMAGE.exe" dist/ -ErrorAction SilentlyContinue
+      - name: Build installer (Inno Setup)
+        shell: pwsh
+        continue-on-error: true
+        run: |
+          choco install innosetup -y --no-progress
+          & "C:\Program Files (x86)\Inno Setup 6\ISCC.exe" Installer\AFTERIMAGE.iss
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AFTERIMAGE-windows
+          path: |
+            dist/
+            Installer/Output/*.exe
