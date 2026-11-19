@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140">
+  <defs><filter id="g" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter></defs>
+  <rect width="640" height="140" fill="#0a0a0f"/>
+  <g fill="none" stroke-width="5">
+    <circle cx="124" cy="60" r="34" stroke="#86dcff" opacity=".45" transform="translate(38 0)"/>
+    <circle cx="106" cy="60" r="34" stroke="#5d4a96" opacity=".75" transform="translate(19 0)"/>
+    <circle cx="106" cy="60" r="34" stroke="#9b6bff" filter="url(#g)" opacity=".6" transform="translate(-19 0)"/>
+    <circle cx="87"  cy="60" r="34" stroke="#9b6bff"/>
+  </g>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-weight="700" font-size="52" letter-spacing="9">
+    <text x="200" y="78" fill="#dcdcec">AFTER<tspan fill="#9b6bff">IMAGE</tspan></text>
+  </g>
+  <text x="203" y="108" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" letter-spacing="1.5" fill="#7b7b92">Turn any sound into something unheard.</text>
+</svg>
